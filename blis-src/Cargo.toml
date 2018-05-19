@@ -1,6 +1,6 @@
 [package]
 authors = ["Mathieu Poumeyrol <kali@zoy.org>"]
-name = "blis-sys"
+name = "blis-src"
 version = "0.1.0"
 
 [build-dependencies]
@@ -16,5 +16,7 @@ cblas = []
 static = []
 system = []
 
-[dependencies]
+[dev-dependencies]
 libc = "0.2.40"
+blas-sys = "0.7"
+cblas-sys = "0.1"

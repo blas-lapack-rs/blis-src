@@ -1,11 +1,13 @@
-# Blis-sys
+# Blis Rust bindings
 
-This crate provides BLAS and/or CBLAS function using [BLIS](https://github.com/flame/blis).
+This repository (will) hold crates to integrates Blis BLAS library in Rust.
 
-Features:
+* `blis-src` is the first and at this point only one. It is just a Blis
+building and linking crate to use standard BLAS or C/BLAS apis.
 
-* `cblas`: includes cblas binding (on by default)
-* `static`: prefer static link (be very careful with this one on Apple platforms)
-* `system`: do not compile blis, link it from a system-wide installation instead
+# Roadmap
 
-
+* add `blis-sys` bindings to use the more flexible api provided on top of 
+which BLAS is implemented in BLIS
+* add `blis` for a safe, Rust-y wrapping on top of BLIS regular and/or
+object-oriented API
