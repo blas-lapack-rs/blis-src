@@ -54,11 +54,16 @@ fn compile(out_dir: &path::Path) {
     if let Some(ranlib) = env("TARGET_RANLIB") {
         configure.arg(format!("RANLIB={}", ranlib));
     }
-    let arch = match &*env("CARGO_CFG_TARGET_ARCH").unwrap() {
-        "x86_64" => "x86_64",
-        "arm"|"armv7" => "arm32",
-        "aarch64" => "arm64",
-        _ => "generic"
+    let rust_arch = env("CARGO_CFG_TARGET_ARCH").unwrap();
+    let arch = if env("TRAVIS").is_some() {
+        "generic"
+    } else {
+        match &*rust_arch {
+            "x86_64" => "x86_64",
+            "arm"|"armv7" => "arm32",
+            "aarch64" => "arm64",
+            _ => "generic"
+        }
     };
     configure.arg(arch);
     assert!(configure
