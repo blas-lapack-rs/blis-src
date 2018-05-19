@@ -2,6 +2,15 @@
 authors = ["Mathieu Poumeyrol <kali@zoy.org>"]
 name = "blis-src"
 version = "0.1.0"
+license = "MIT/Apache-2.0"
+description = "Rust native linking for Blis library"
+repository = "https://github.com/kali/blis-rs"
+keywords = [ "blas", "blis" ]
+categories = [ "science" ]
+documentation = "http://docs.rs/blis-src"
+
+[badges]
+travis-ci = { repository = "kali/blis-rs" }
 
 [build-dependencies]
 flate2 = "1.0.1"
