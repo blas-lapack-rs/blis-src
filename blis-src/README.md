@@ -10,3 +10,5 @@ Features:
 
 It does not provides the BLAS or CBLAS functions Rust declarations. It is meant
 to use the ones provides by `blas-sys` and `cblas-sys` crates instead.
+
+See also [blas example](tests/blas_gemm.rs) or [cblas example](tests/cblas_gemm.rs).
