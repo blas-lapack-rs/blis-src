@@ -17,7 +17,7 @@ fn env(k: &str) -> Option<String> {
 fn obtain_source(out_dir:&path::Path) {
     let blis_build = out_dir.join("src");
     if !blis_build.exists() {
-        if env("BLIS_SYS_FROM_GITHUB").is_some() {
+        if env("BLIS_SYS_GIT").is_some() || env("BLIS_SYS_GIT_BRANCH").is_some() {
             git_clone(out_dir);
         } else {
             download_release(out_dir);
@@ -26,7 +26,11 @@ fn obtain_source(out_dir:&path::Path) {
 }
 
 fn git_clone(out_dir:&path::Path) {
-    git2::Repository::clone("https://github.com/flame/blis", out_dir.join("src")).unwrap();
+    let mut repo = git2::build::RepoBuilder::new();
+    if let Some(b) = env("BLIS_SYS_GIT_BRANCH") {
+        repo.branch(&b);
+    }
+    repo.clone("https://github.com/flame/blis", &out_dir.join("src")).unwrap();
 }
 
 fn download_release(out_dir:&path::Path) {
