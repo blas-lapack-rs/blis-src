@@ -38,7 +38,12 @@ fn git_clone(out_dir:&path::Path) {
     if let Some(b) = env("BLIS_SRC_GIT_BRANCH") {
         repo.branch(&b);
     }
-    repo.clone("https://github.com/flame/blis", &out_dir.join("src")).unwrap();
+    let repo_url = if let Some(url) = env("BLIS_SRC_GIT_URL") {
+        url
+    } else {
+        "https://github.com/flame/blis".to_string()
+    };
+    repo.clone(&*repo_url, &out_dir.join("src")).unwrap();
 }
 
 fn download_release(out_dir:&path::Path) {
