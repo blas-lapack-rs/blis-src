@@ -16,8 +16,11 @@ links = "blis"
 travis-ci = { repository = "kali/blis-rs" }
 
 [features]
-default = ["cblas"]
+default = ["pthreads", "cblas"]
 
+pthreads = []
+openmp = []
+serial = []
 cblas = []
 static = []
 system = []

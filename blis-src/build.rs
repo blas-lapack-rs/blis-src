@@ -16,8 +16,18 @@ fn compile(blis_build: &Path, out_dir: &Path) {
     configure
         .current_dir(&blis_build)
         .arg(format!("--prefix={}", out_dir.to_string_lossy()))
-        .arg("--enable-cblas")
-        .arg("--enable-threading=pthreads");
+        .arg("--enable-cblas");
+    let threading = match (
+        env("CARGO_FEATURE_PTHREADS"),
+        env("CARGO_FEATURE_OPENMP"),
+        env("CARGO_FEATURE_SERIAL"),
+    ) {
+        (Some(_), None, None) => "pthreads",
+        (None, Some(_), None) => "openmp",
+        (None, None, Some(_)) => "no",
+        _ => panic!("Features 'pthreads', 'openmp', and 'serial' are mutually exclusive."),
+    };
+    configure.arg(format!("--enable-threading={}", threading));
     if env("CARGO_FEATURE_STATIC").is_some() {
         configure.args(&["--enable-static", "--disable-shared"]);
     } else {
