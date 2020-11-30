@@ -74,6 +74,9 @@ fn main() {
             if build_dir.exists() {
                 fs::remove_dir_all(&build_dir).unwrap();
             }
+            if !std::fs::metadata("upstream").is_ok() {
+                panic!("upstream directory can not be read. Consider running `git submodule update --init`.");
+            }
             run(Command::new("cp").arg("-R").arg("upstream").arg(&build_dir));
             compile(&build_dir, &out_dir);
         }
