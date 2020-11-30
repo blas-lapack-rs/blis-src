@@ -88,6 +88,7 @@ fn main() {
         "dylib"
     };
     println!("cargo:rustc-link-lib={}=blis", kind);
+    println!("cargo:rerun-if-changed=build.rs");
 }
 
 fn run(command: &mut Command) {
