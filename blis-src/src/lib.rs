@@ -1,16 +1,16 @@
 //! # Blis-sys
-//! 
+//!
 //! This crate provides BLAS and/or CBLAS function using [BLIS](https://github.com/flame/blis).
-//! 
+//!
 //! Features:
-//! 
+//!
 //! * `cblas`: includes cblas binding (on by default)
 //! * `static`: prefer static link (be very careful with this one on Apple platforms)
 //! * `system`: do not compile blis, link it from a system-wide installation instead
-//! 
+//!
 //! It does not provides the BLAS or CBLAS functions Rust declarations. It is meant
 //! to use the ones provides by `blas-sys` and `cblas-sys` crates instead.
-//! 
+//!
 //! See also [blas example](tests/blas_gemm.rs) or [cblas example](tests/cblas_gemm.rs).
 
 #[cfg(test)]
@@ -19,7 +19,7 @@ mod tests {
     extern crate libc;
     use self::libc::*;
 
-    extern {
+    extern "C" {
         pub fn bli_info_get_version_str() -> *const c_char;
         pub fn sgemm_(
             transa: *const c_char,
@@ -49,19 +49,26 @@ mod tests {
 
     #[test]
     fn sgemm() {
-        let a = [ 1.0 ];
-        let b = [ 2.0 ];
-        let mut c = [ 12.0 ];
+        let a = [1.0];
+        let b = [2.0];
+        let mut c = [12.0];
 
         unsafe {
             sgemm_(
-                &(b'N' as i8), &(b'N' as i8),
-                &1, &1, &1,
+                &(b'N' as i8),
+                &(b'N' as i8),
+                &1,
+                &1,
+                &1,
                 &1.0,
-                a.as_ptr(), &1,
-                b.as_ptr(), &1,
+                a.as_ptr(),
+                &1,
+                b.as_ptr(),
+                &1,
                 &0.0,
-                c.as_mut_ptr(), &1);
+                c.as_mut_ptr(),
+                &1,
+            );
         }
         assert_eq!(&c, &[2.0]);
     }
