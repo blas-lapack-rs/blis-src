@@ -1,4 +1,4 @@
-# BLIS Rust bindings
+# BLIS Rust bindings [![Package][package-img]][package-url] [![Documentation][documentation-img]][documentation-url]
 
 This repository holds crates to call BLIS, the BLAS-like Library Instantiation Framework, from Rust.
 
@@ -28,3 +28,8 @@ All original work licensed under either of
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you, as defined in the Apache-2.0 license, shall
 be dual licensed as above, without any additional terms or conditions.
+
+[package-img]: https://img.shields.io/crates/v/blis-src.svg
+[package-url]: https://crates.io/crates/blis-src
+[documentation-img]: https://docs.rs/blis-src/badge.svg
+[documentation-url]: https://docs.rs/blis-src
