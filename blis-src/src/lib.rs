@@ -1,4 +1,4 @@
-//! # Blis-sys
+//! # blis-src
 //!
 //! This crate provides BLAS and/or CBLAS function using [BLIS](https://github.com/flame/blis).
 //!
@@ -9,9 +9,9 @@
 //! * `system`: do not compile blis, link it from a system-wide installation instead
 //!
 //! It does not provides the BLAS or CBLAS functions Rust declarations. It is meant
-//! to use the ones provides by `blas-sys` and `cblas-sys` crates instead.
+//! to use the ones provided by `blas-sys` and `cblas-sys` crates instead.
 //!
-//! See also [blas example](tests/blas_gemm.rs) or [cblas example](tests/cblas_gemm.rs).
+//! See also [blas example](../tests/blas_gemm.rs) or [cblas example](../tests/cblas_gemm.rs).
 
 #[cfg(test)]
 mod tests {
