@@ -33,5 +33,5 @@ be dual licensed as above, without any additional terms or conditions.
 [package-url]: https://crates.io/crates/blis-src
 [documentation-img]: https://docs.rs/blis-src/badge.svg
 [documentation-url]: https://docs.rs/blis-src
-[actions-img]: https://github.com/jedbrown/blis-rs/workflows/Rust/badge.svg
-[actions-url]: https://github.com/jedbrown/blis-rs/actions
+[actions-img]: https://github.com/kali/blis-rs/workflows/Rust/badge.svg
+[actions-url]: https://github.com/kali/blis-rs/actions
