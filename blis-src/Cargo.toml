@@ -1,5 +1,8 @@
 [package]
-authors = ["Mathieu Poumeyrol <kali@zoy.org>"]
+authors = [
+    "Mathieu Poumeyrol <kali@zoy.org>",
+    "Jed Brown <jed@jedbrown.org>",
+]
 name = "blis-src"
 edition = "2018"
 version = "0.1.1-pre"
