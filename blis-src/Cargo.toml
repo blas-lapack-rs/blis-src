@@ -21,9 +21,6 @@ exclude = [
     "upstream/**/test/",
 ]
 
-[badges]
-travis-ci = { repository = "kali/blis-rs" }
-
 [features]
 default = ["pthreads", "cblas"]
 

@@ -14,6 +14,8 @@ This repository holds crates to call BLIS, the BLAS-like Library Instantiation F
 * Add `blis` for a safe, Rust-y wrapping on top of BLIS regular and/or
   object-oriented API.
 
+This plan is currently on hold.
+
 # License
 
 ## Apache 2.0/MIT
