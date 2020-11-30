@@ -12,12 +12,17 @@ fn c_gemm() {
             cblas_sys::CBLAS_LAYOUT::CblasColMajor,
             cblas_sys::CBLAS_TRANSPOSE::CblasNoTrans,
             cblas_sys::CBLAS_TRANSPOSE::CblasNoTrans,
-            1, 1, 1,
+            1,
+            1,
+            1,
             1.0,
-            a.as_ptr(), 1,
-            b.as_ptr(), 1,
+            a.as_ptr(),
+            1,
+            b.as_ptr(),
+            1,
             0.0,
-            c.as_mut_ptr(), 1,
+            c.as_mut_ptr(),
+            1,
         );
     }
     assert_eq!(&c, &[2.0]);

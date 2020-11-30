@@ -1,5 +1,5 @@
-extern crate blis_src;
 extern crate blas_sys;
+extern crate blis_src;
 
 #[test]
 fn f_gemm() {
@@ -26,4 +26,3 @@ fn f_gemm() {
     }
     assert_eq!(&c, &[2.0]);
 }
-
