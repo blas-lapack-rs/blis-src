@@ -11,6 +11,12 @@ categories = [ "science" ]
 documentation = "http://docs.rs/blis-src"
 readme = "../README.md"
 links = "blis"
+exclude = [
+    "upstream/docs/",
+    "upstream/examples/",
+    "upstream/mpi_test/",
+    "upstream/**/test/",
+]
 
 [badges]
 travis-ci = { repository = "kali/blis-rs" }
