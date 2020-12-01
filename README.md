@@ -7,15 +7,6 @@ This repository holds crates to call BLIS, the BLAS-like Library Instantiation F
   [cblas-sys](https://lib.rs/crates/cblas-sys), or one can use `extern "C"` to
   call the full BLIS API.
 
-# Roadmap
-
-* Add `blis-sys` bindings to use the more flexible API provided on top of which
-  BLAS is implemented in BLIS.
-* Add `blis` for a safe, Rust-y wrapping on top of BLIS regular and/or
-  object-oriented API.
-
-This plan is currently on hold.
-
 # License
 
 ## Apache 2.0/MIT
