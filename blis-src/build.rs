@@ -33,15 +33,14 @@ fn compile(blis_build: &Path, out_dir: &Path) {
     } else {
         configure.args(&["--disable-static", "--enable-shared"]);
     }
-    if let Some(cc) = env("TARGET_CC") {
-        configure.arg(format!("CC={}", cc));
-    }
-    if let Some(ranlib) = env("TARGET_RANLIB") {
-        configure.arg(format!("RANLIB={}", ranlib));
+    for var in &["CC", "FC", "RANLIB", "AR", "CFLAGS", "LDFLAGS"] {
+        if let Some(value) = env(&format!("TARGET_{}", var)) {
+            configure.arg(format!("{}={}", var, value));
+        }
     }
     let rust_arch = env("CARGO_CFG_TARGET_ARCH").unwrap();
-    let arch = if env("TRAVIS").is_some() {
-        "generic"
+    let blis_confname = if let Some(a) = env("BLIS_CONFNAME") {
+        a
     } else {
         match &*rust_arch {
             "x86_64" => "x86_64", // Build all microkernels; run-time dispatch
@@ -52,9 +51,9 @@ fn compile(blis_build: &Path, out_dir: &Path) {
             "aarch64" => "auto",       // cortexa57/thunderx2
             "powerpc64" => "auto",     // bgq/power9/power10
             _ => "generic",
-        }
+        }.to_string()
     };
-    configure.arg(arch);
+    configure.arg(blis_confname);
     run(&mut configure);
     let makeflags = env("CARGO_MAKEFLAGS").unwrap();
     run(Command::new("make")

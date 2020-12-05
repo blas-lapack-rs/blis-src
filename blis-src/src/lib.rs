@@ -4,14 +4,25 @@
 //!
 //! Features:
 //!
-//! * `cblas`: includes cblas binding (on by default)
+//! * `cblas`: build the CBLAS interface (enabled by default)
 //! * `static`: prefer static link (be very careful with this one on Apple platforms)
-//! * `system`: do not compile blis, link it from a system-wide installation instead
+//! * `pthreads` or `openmp` or `serial`: choose exactly one to specify the threading mode (`pthreads` by default)
+//! * `system`: do not compile BLIS and instead use a system-provided version (must be in system's default link path).
 //!
-//! It does not provides the BLAS or CBLAS functions Rust declarations. It is meant
-//! to use the ones provided by `blas-sys` and `cblas-sys` crates instead.
+//! This package does not provides Rust declarations for BLAS or CBLAS, which
+//! are available in the [`blas-sys`](https://lib.rs/crates/blas-sys) and
+//! [`cblas-sys`](https://lib.rs/crates/cblas-sys) crates. See the [blas
+//! example](../tests/blas_gemm.rs) and [cblas example](../tests/cblas_gemm.rs)
+//! for usage.
 //!
-//! See also [blas example](../tests/blas_gemm.rs) or [cblas example](../tests/cblas_gemm.rs).
+//! Users simply seeking a fast BLAS are encouraged to use
+//! [`blas-sys`](https://lib.rs/crates/blas-src) with the following in
+//! `Cargo.toml`:
+//!
+//! ```toml
+//! [dependencies]
+//! blas-src = { version = "0.7", features = ["blis"] }
+//! ```
 
 #[cfg(test)]
 mod tests {
