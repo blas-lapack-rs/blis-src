@@ -25,6 +25,9 @@ fn compile(blis_build: &Path, out_dir: &Path) {
         (Some(_), None, None) => "pthreads",
         (None, Some(_), None) => "openmp",
         (None, None, Some(_)) => "no",
+        (None, None, None) => panic!(
+            "One of the following features must be enabled: 'pthreads', 'openmp', and 'serial'."
+        ),
         _ => panic!("Features 'pthreads', 'openmp', and 'serial' are mutually exclusive."),
     };
     configure.arg(format!("--enable-threading={}", threading));
