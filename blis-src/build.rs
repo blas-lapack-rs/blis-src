@@ -54,7 +54,8 @@ fn compile(blis_build: &Path, out_dir: &Path) {
             "aarch64" => "auto",       // cortexa57/thunderx2
             "powerpc64" => "auto",     // bgq/power9/power10
             _ => "generic",
-        }.to_string()
+        }
+        .to_string()
     };
     configure.arg(blis_confname);
     run(&mut configure);
@@ -76,7 +77,12 @@ fn main() {
             if build_dir.exists() {
                 fs::remove_dir_all(&build_dir).unwrap();
             }
-            if !std::fs::metadata("upstream").is_ok() {
+            // Check if upstream is a non-empty directory.
+            if std::fs::read_dir("upstream")
+                .ok()
+                .and_then(|mut d| d.next().filter(|de| de.is_ok()))
+                .is_none()
+            {
                 panic!("upstream directory can not be read. Consider running `git submodule update --init`.");
             }
             run(Command::new("cp").arg("-R").arg("upstream").arg(&build_dir));
@@ -86,6 +92,8 @@ fn main() {
             "cargo:rustc-link-search=native={}",
             lib_dir.to_string_lossy()
         );
+        let include_dir = out_dir.join("include");
+        println!("cargo:include={}", include_dir.to_string_lossy());
     }
     let kind = if env("CARGO_FEATURE_STATIC").is_some() {
         "static"
