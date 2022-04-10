@@ -42,17 +42,19 @@ fn compile(blis_build: &Path, out_dir: &Path) {
         }
     }
     let rust_arch = env("CARGO_CFG_TARGET_ARCH").unwrap();
+    let target_os = env("CARGO_CFG_TARGET_OS").unwrap();
     let blis_confname = if let Some(a) = env("BLIS_CONFNAME") {
         a
     } else {
-        match &*rust_arch {
-            "x86_64" => "x86_64", // Build all microkernels; run-time dispatch
+        match (&*target_os, &*rust_arch) {
+            (_, "x86_64") => "x86_64", // Build all microkernels; run-time dispatch
 
             // BLIS does not have run-time arch detection on ARM or PowerPC.
             // We'll let BLIS configure determine the best match.
-            "arm" | "armv7" => "auto", // cortexa9/cortexa15
-            "aarch64" => "auto",       // cortexa57/thunderx2
-            "powerpc64" => "auto",     // bgq/power9/power10
+            (_, "arm" | "armv7") => "auto",      // cortexa9/cortexa15
+            ("macos", "aarch64") => "firestorm", // Apple M1
+            (_, "aarch64") => "auto",            // cortexa57/thunderx2
+            (_, "powerpc64") => "auto",          // bgq/power9/power10
             _ => "generic",
         }
         .to_string()
