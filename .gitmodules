@@ -1,3 +1,3 @@
 [submodule "source"]
 	path = blis-src/upstream
-	url = https://github.com/flame/blis
+	url = https://github.com/jedbrown/blis
