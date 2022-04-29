@@ -4,7 +4,7 @@ This repository contains a Rust package to build and link [BLIS], the BLAS-like 
 
  ```toml
 [dependencies]
-blas-src = { version = "0.7", features = ["blis"] }
+blas-src = { version = "0.8", features = ["blis"] }
 ```
 
 To access the full BLIS API, direct use of `extern "C"` is necessary at this time.
