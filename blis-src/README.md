@@ -1,14 +1,25 @@
-# Blis-sys
+# blis-src
 
-This crate provides BLAS and/or CBLAS function using [BLIS](https://github.com/flame/blis).
+This crate provides BLAS and/or CBLAS functions using [BLIS](https://github.com/flame/blis).
 
-Features:
+## Features:
 
-* `cblas`: includes cblas binding (on by default)
+* `cblas`: build the CBLAS interface (enabled by default)
 * `static`: prefer static link (be very careful with this one on Apple platforms)
-* `system`: do not compile blis, link it from a system-wide installation instead
+* `pthreads` or `openmp` or `serial`: choose exactly one to specify the threading mode (`pthreads` by default)
+* `system`: do not compile BLIS and instead use a system-provided version (must be in system's default link path).
 
-It does not provides the BLAS or CBLAS functions Rust declarations. It is meant
-to use the ones provides by `blas-sys` and `cblas-sys` crates instead.
+This package does not provides Rust declarations for BLAS or CBLAS, which
+are available in the [`blas-sys`](https://lib.rs/crates/blas-sys) and
+[`cblas-sys`](https://lib.rs/crates/cblas-sys) crates. See the [blas
+example](https://github.com/blas-lapack-rs/blis-src/blob/main/blis-src/tests/blas_gemm.rs) and [cblas example](https://github.com/blas-lapack-rs/blis-src/blob/main/blis-src/tests/cblas_gemm.rs)
+for usage.
 
-See also [blas example](tests/blas_gemm.rs) or [cblas example](tests/cblas_gemm.rs).
+Users simply seeking a fast BLAS are encouraged to use
+[`blas-sys`](https://lib.rs/crates/blas-src) with the following in
+`Cargo.toml`:
+
+```toml
+[dependencies]
+blas-src = { version = "0.8", features = ["blis"] }
+```

@@ -1,3 +1,5 @@
+//! Test calling `cblas_sgemm` using `cblas-sys`.
+
 extern crate blis_src;
 extern crate cblas_sys;
 

@@ -1,3 +1,5 @@
+//! Test calling Fortran `sgemm` using `blas-sys`.
+
 extern crate blas_sys;
 extern crate blis_src;
 
