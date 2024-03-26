@@ -8,7 +8,7 @@ on:
 
 jobs:
   macos:
-    runs-on: macos-10.15
+    runs-on: macos-13
     strategy:
       fail-fast: false
       matrix:
@@ -17,22 +17,20 @@ jobs:
           - static
           - system
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
       with:
         submodules: 'recursive'
     - name: Install BLIS by homebrew
       run: |
         brew install blis
       if: ${{ contains(matrix.feature, 'system') }}
-    - uses: actions-rs/cargo@v1
-      with:
-        command: test
-        args: >
-          --features=${{ matrix.feature }}
-          --manifest-path=blis-src/Cargo.toml
+    - uses: dtolnay/rust-toolchain@stable
+    - run: >
+        cargo test
+        --features=${{ matrix.feature }}
 
   linux:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     container:
       image: rust
     strategy:
@@ -43,7 +41,7 @@ jobs:
           - static
           - system
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
       with:
         submodules: 'recursive'
     - name: Install BLIS by apt
@@ -51,9 +49,7 @@ jobs:
         apt update
         apt install -y libblis-dev
       if: ${{ contains(matrix.feature, 'system') }}
-    - uses: actions-rs/cargo@v1
-      with:
-        command: test
-        args: >
-          --features=${{ matrix.feature }}
-          --manifest-path=blis-src/Cargo.toml
+    - uses: dtolnay/rust-toolchain@stable
+    - run: >
+        cargo test
+        --features=${{ matrix.feature }}
