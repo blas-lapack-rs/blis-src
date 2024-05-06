@@ -21,5 +21,5 @@ Users simply seeking a fast BLAS are encouraged to use
 
 ```toml
 [dependencies]
-blas-src = { version = "0.8", features = ["blis"] }
+blas-src = { version = "0.10", features = ["blis"] }
 ```

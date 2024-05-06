@@ -4,7 +4,7 @@ authors = [
     "Jed Brown <jed@jedbrown.org>",
 ]
 name = "blis-src"
-edition = "2018"
+edition = "2021"
 version = "0.2.1"
 license = "MIT OR Apache-2.0"
 description = "Rust native linking for BLIS library"
@@ -30,6 +30,9 @@ static = []
 system = []
 
 [dev-dependencies]
-libc = "0.2.40"
+libc = "0.2.154"
 blas-sys = "0.7"
-cblas-sys = "0.1"
+cblas-sys = "0.1.3"
+
+[package.metadata.release]
+tag-name = "{{crate_name}}-{{version}}"
