@@ -5,7 +5,7 @@ authors = [
 ]
 name = "blis-src"
 edition = "2021"
-version = "0.2.1"
+version = "0.2.2"
 license = "MIT OR Apache-2.0"
 description = "Rust native linking for BLIS library"
 repository = "https://github.com/blas-lapack-rs/blis-src"
