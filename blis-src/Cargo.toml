@@ -30,9 +30,9 @@ static = []
 system = []
 
 [dev-dependencies]
-libc = "0.2.154"
-blas-sys = "0.7"
-cblas-sys = "0.1.3"
+libc = "0.2.186"
+blas-sys = "0.9"
+cblas-sys = "0.3.0"
 
 [package.metadata.release]
 tag-name = "{{crate_name}}-{{version}}"
